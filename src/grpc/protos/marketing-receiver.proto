@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+package vn.techres.microservice.grpc.java.elasticsearch.marketing.receiver;
+
+service RestaurantMarketingReceiverService {
+	rpc findByMarketingType (MarketingRequest) returns (ListRestaurantMarketingReceiverResponse) {};
+	rpc findDetailByMarketingType (MarketingRequest) returns (ListRestaurantMarketingReceiverDetailResponse) {}
+
+}
+
+message MarketingRequest {
+	int32 restaurant_id = 1;
+	int32 restaurant_brand_id = 2;
+	int32 marketing_type = 3;
+	int32 condition = 4;
+	int32 limit = 5;
+	int32 offset = 6;
+}
+
+message ListRestaurantMarketingReceiverResponse {
+	int32 status = 1;
+	string message = 2;
+	BaseListDataResponse data = 3;
+}
+
+message BaseListDataResponse {
+	repeated RestaurantMarketingReceiver list = 1;
+	int32 total_record = 2;
+	int32 limit = 3;
+}
+
+message ListRestaurantMarketingReceiverDetailResponse {
+	int32 status = 1;
+	string message = 2;
+	BaseListDataDetailResponse data = 3;
+}
+
+message BaseListDataDetailResponse {
+	repeated RestaurantMarketingReceiverDetail list = 1;
+	int32 total_record = 2;
+	int32 limit = 3;
+}
+
+message RestaurantMarketingReceiverDetail {
+	int32 customer_id = 1;
+	string phone = 2;
+	string name = 3;
+}
+
+message RestaurantMarketingReceiver {
+	int32 customer_id = 1;
+}
